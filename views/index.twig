@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Available Products</title>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <h1 id="availableProductsCount">Available Products: 0</h1>
+  <button id="getProductsButton">Chercher</button>
+
+  <script>
+    const socket = io();
+
+    document.getElementById('getProductsButton').addEventListener('click', () => {
+      socket.emit('getAvailableProducts');
+    });
+
+    socket.on('availableProductsCount', (count) => {
+      document.getElementById('availableProductsCount').innerText = `Available Products: ${count}`;
+    });
+  </script>
+</body>
+</html>
